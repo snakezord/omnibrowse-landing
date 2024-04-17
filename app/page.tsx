@@ -7,10 +7,11 @@ import { NextBlueButton } from "@/components/ui/buttons/next-blue";
 import { IconArrowRight } from "@tabler/icons-react";
 import Image from "next/image";
 import { Hero } from "@/components/ui/hero";
+import { HeroHighlight } from "@/components/ui/hero-highlight";
 
 export default function Home() {
   return (
-    <>
+    <HeroHighlight>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
       <Navbar />
 
@@ -43,6 +44,6 @@ export default function Home() {
       </MaxWidthWrapper>
 
       <Footer />
-    </>
+    </HeroHighlight>
   );
 }

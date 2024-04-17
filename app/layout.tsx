@@ -24,7 +24,7 @@ export default function RootLayout({
           GeistSans.className,
         )}
       >
-        <HeroHighlight>{children}</HeroHighlight>
+        {children}
       </body>
     </html>
   );
