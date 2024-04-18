@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body
         className={cn(
-          "flex min-h-screen flex-col bg-black font-sans antialiased",
+          "flex h-full min-h-screen flex-col bg-black font-sans antialiased",
           GeistSans.className,
         )}
       >

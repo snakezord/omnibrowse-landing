@@ -1,6 +1,3 @@
-import Link from "next/link";
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
