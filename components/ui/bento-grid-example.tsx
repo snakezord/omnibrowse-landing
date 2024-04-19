@@ -6,16 +6,24 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BentoGrid, BentoGridItem } from "./bento-grid";
+import { Highlight } from "./highlight";
 import {
-  LogoChatGpt3,
+  IconFileTypePdf,
+  IconFileTypeCsv,
+  IconJson,
+  IconHtml,
+} from "@tabler/icons-react";
+
+import {
   LogoChatGpt4,
   LogoClaude2,
-  LogoClaudeInstant,
+  LogoGemini,
+  LogoMixtral,
 } from "./logo-model";
 
 export function BentoGridThirdDemo() {
   return (
-    <BentoGrid className="mx-auto max-w-4xl md:auto-rows-[20rem]">
+    <BentoGrid className="max-w-4xl md:auto-rows-[20rem]">
       {items.map((item, i) => (
         <motion.div
           className={cn("[&>p:text-lg]", item.className)}
@@ -78,125 +86,201 @@ const SkeletonOne = () => {
     >
       <motion.div
         variants={variants}
-        className="flex flex-row items-center space-x-2 rounded-full border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
       >
-        <LogoChatGpt3 />
-        <div className="h-4 w-full rounded-full bg-gray-100 dark:bg-neutral-900" />
+        <LogoChatGpt4 />
+        <p>GPT-4 Turbo</p>
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="ml-auto flex w-3/4 flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="ml-auto flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
       >
-        <div className="h-4 w-full rounded-full bg-gray-100 dark:bg-neutral-900" />
-        <LogoChatGpt4 />
+        <p>Claude 3</p>
+        <LogoClaude2 />
       </motion.div>
       <motion.div
         variants={variants}
-        className="flex flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
       >
-        <LogoClaudeInstant />
-        <div className="h-4 w-full rounded-full bg-gray-100 dark:bg-neutral-900" />
+        <LogoGemini />
+        <p>Gemini Pro</p>
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="ml-auto flex w-3/4 flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="ml-auto flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
       >
-        <div className="h-4 w-full rounded-full bg-gray-100 dark:bg-neutral-900" />
-        <LogoClaude2 />
+        <p>Mixtral</p>
+        <LogoMixtral />
       </motion.div>
     </motion.div>
   );
 };
+
+const ApiKeyComponent = () => {
+  return (
+    <div className="flex flex-col items-start gap-1">
+      <p>Enter your API key</p>
+      <input
+        className="max-w-44 rounded-md pl-3"
+        type="text"
+        value="sk-xxxxxxxxxxxxxxxx"
+        disabled
+      />
+    </div>
+  );
+};
+
+const ApiKeyComponentSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="h-4 w-32 animate-pulse rounded-md bg-gray-800"></div>
+      <div className="h-5 w-44 animate-pulse rounded-md bg-gray-600"></div>
+    </div>
+  );
+};
+
 const SkeletonTwo = () => {
-  const variants = {
+  const elements = [
+    { id: "gpt4", icon: <LogoChatGpt4 />, component: <ApiKeyComponent /> },
+    {
+      id: "claude",
+      icon: <LogoClaude2 />,
+      component: <ApiKeyComponentSkeleton />,
+    },
+    {
+      id: "gemini",
+      icon: <LogoGemini />,
+      component: <ApiKeyComponentSkeleton />,
+    },
+  ];
+
+  const CARD_OFFSET = 45; // Adjusts the vertical position of each card
+  const SCALE_FACTOR = 0.1; // Decreases the scale for each card behind
+
+  const containerVariants = {
     initial: {
-      width: 0,
+      scale: 1,
     },
     animate: {
-      width: "100%",
+      scale: 1.03,
       transition: {
         duration: 0.2,
       },
     },
-    hover: {
-      width: ["0%", "100%"],
-      transition: {
-        duration: 2,
-      },
-    },
   };
-  const arr = new Array(6).fill(0);
+
   return (
     <motion.div
+      className="relative flex h-full min-h-[10rem] w-full items-end justify-center"
+      variants={containerVariants}
       initial="initial"
-      animate="animate"
-      whileHover="hover"
-      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2"
+      whileHover="animate"
     >
-      {arr.map((_, i) => (
+      {elements.map((element, index) => (
         <motion.div
-          key={"skelenton-two" + i}
-          variants={variants}
+          key={element.id}
+          className={`absolute flex w-full flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 shadow-lg dark:border-white/[0.2] dark:bg-black`}
           style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + "%",
+            y: index * -CARD_OFFSET,
+            scale: 1 - index * SCALE_FACTOR,
+            zIndex: elements.length - index,
           }}
-          className="flex h-4 w-full flex-row items-center space-x-2 rounded-full  border border-neutral-100 bg-neutral-100 p-2 dark:border-white/[0.2] dark:bg-black"
-        ></motion.div>
+        >
+          {element.icon}
+          {element.component}
+        </motion.div>
       ))}
     </motion.div>
   );
 };
+
 const SkeletonThree = () => {
-  const variants = {
+  const scale = {
     initial: {
-      backgroundPosition: "0 50%",
+      scale: 1,
     },
     animate: {
-      backgroundPosition: ["0, 50%", "100% 50%", "0 50%"],
+      scale: 1.1,
+      x: 10,
+      transition: {
+        duration: 0.2,
+      },
     },
   };
+  const variants = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: 5,
+      rotate: 3,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+  const variantsSecond = {
+    initial: {
+      x: 0,
+    },
+    animate: {
+      x: -5,
+      rotate: -3,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
+
   return (
     <motion.div
       initial="initial"
-      animate="animate"
-      variants={variants}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2 rounded-lg"
-      style={{
-        background:
-          "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
-        backgroundSize: "400% 400%",
-      }}
+      whileHover="animate"
+      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2"
     >
-      <motion.div className="h-full w-full rounded-lg"></motion.div>
+      <Message
+        text="Make this cat less grumpy"
+        author="human"
+        variants={variants}
+      />
+      <motion.div variants={scale}>
+        <Image
+          className="h-12 w-12 rounded-lg"
+          src="/grumpy-cat.webp"
+          width={100}
+          height={100}
+          alt="grumpy-cat"
+        />
+      </motion.div>
+      <Message
+        text="Sure, here is less grumpy cat"
+        author="ai"
+        variants={variantsSecond}
+      />
+      <motion.div variants={scale}>
+        <Image
+          className="h-12 w-12 rounded-lg"
+          src="/less-grumpy-cat.webp"
+          width={100}
+          height={100}
+          alt="grumpy-cat"
+        />
+      </motion.div>
     </motion.div>
   );
 };
+
 const SkeletonFour = () => {
   const first = {
     initial: {
-      x: 20,
-      rotate: -5,
+      x: 10,
     },
     hover: {
       x: 0,
       rotate: 0,
     },
   };
-  const second = {
-    initial: {
-      x: -20,
-      rotate: 5,
-    },
-    hover: {
-      x: 0,
-      rotate: 0,
-    },
-  };
+
   return (
     <motion.div
       initial="initial"
@@ -206,59 +290,34 @@ const SkeletonFour = () => {
     >
       <motion.div
         variants={first}
-        className="flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 dark:border-white/[0.1] dark:bg-black"
+        className="z-20 flex h-full flex-col items-start justify-start gap-2 rounded-2xl bg-transparent"
       >
-        <Image
-          src="https://pbs.twimg.com/profile_images/1763380041356873728/li_Nl2LT_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10 rounded-full"
+        <Message
+          text="Summarize and relate following documents"
+          author="human"
         />
-        <p className="mt-4 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
-          Just code in Vanilla Javascript
-        </p>
-        <p className="mt-4 rounded-full border border-red-500 bg-red-100 px-2 py-0.5 text-xs text-red-600 dark:bg-red-900/20">
-          Delusional
-        </p>
-      </motion.div>
-      <motion.div className="relative z-20 flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 dark:border-white/[0.1] dark:bg-black">
-        <Image
-          src="https://pbs.twimg.com/profile_images/1763380041356873728/li_Nl2LT_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10 rounded-full"
+        <Attachments />
+        <Message
+          text="Those documents share similarities in the following..."
+          author="ai"
         />
-        <p className="mt-4 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
-          Tailwind CSS is cool, you know
-        </p>
-        <p className="mt-4 rounded-full border border-green-500 bg-green-100 px-2 py-0.5 text-xs text-green-600 dark:bg-green-900/20">
-          Sensible
-        </p>
-      </motion.div>
-      <motion.div
-        variants={second}
-        className="flex h-full w-1/3 flex-col items-center justify-center rounded-2xl border border-neutral-200 bg-white p-4 dark:border-white/[0.1] dark:bg-black"
-      >
-        <Image
-          src="https://pbs.twimg.com/profile_images/1763380041356873728/li_Nl2LT_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10 rounded-full"
-        />
-        <p className="mt-4 text-center text-xs font-semibold text-neutral-500 sm:text-sm">
-          I love angular, RSC, and Redux.
-        </p>
-        <p className="mt-4 rounded-full border border-orange-500 bg-orange-100 px-2 py-0.5 text-xs text-orange-600 dark:bg-orange-900/20">
-          Helpless
-        </p>
       </motion.div>
     </motion.div>
   );
 };
+
 const SkeletonFive = () => {
+  const scale = {
+    initial: {
+      scale: 1,
+    },
+    animate: {
+      scale: 1.1,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
   const variants = {
     initial: {
       x: 0,
@@ -290,49 +349,43 @@ const SkeletonFive = () => {
       whileHover="animate"
       className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2"
     >
+      <Message text="Summarize my X feed" author="human" variants={variants} />
       <motion.div
-        variants={variants}
-        className="flex flex-row items-start space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="flex w-fit items-center gap-1.5 rounded-2xl border p-1 dark:border-white/[0.1]"
+        variants={scale}
       >
         <Image
-          src="https://pbs.twimg.com/profile_images/1763380041356873728/li_Nl2LT_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="h-10 w-10 rounded-full"
+          className="h-8 w-8 rounded-lg"
+          src="/x.jpg"
+          width={100}
+          height={100}
+          alt="twitter"
         />
-        <p className="text-xs text-neutral-500">
-          There are a lot of cool framerworks out there like React, Angular,
-          Vue, Svelte that can make your life ....
-        </p>
+        <div className="flex flex-col items-start">
+          <p className="text-sm text-neutral-300">Home / X</p>
+          <p className="text-xs text-neutral-600">x.com/home</p>
+        </div>
       </motion.div>
       <motion.div
         variants={variantsSecond}
-        className="ml-auto flex w-3/4 flex-row items-center justify-end space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+        className="flex w-fit flex-row items-center justify-end space-x-2 rounded-full border border-neutral-100 bg-white p-2 text-start dark:border-white/[0.2] dark:bg-black"
       >
-        <p className="text-xs text-neutral-500">Use PHP.</p>
-        <div className="h-6 w-6 flex-shrink-0 rounded-full bg-gradient-to-r from-pink-500 to-violet-500" />
+        <LogoChatGpt4 />
+        <p className="text-xs text-neutral-500">
+          Your feed consists of tweets from Historic Vids, Dan, Elon Musk...
+        </p>
       </motion.div>
     </motion.div>
   );
 };
+
 const items = [
   {
-    title: "Chat with any latest LLM 🧠",
+    title: "No monthly fee, no limit ∞",
     description: (
       <span className="text-sm">
-        Experience the power of AI in generating unique content.
-      </span>
-    ),
-    header: <SkeletonOne />,
-    className: "md:col-span-1",
-    icon: null,
-  },
-  {
-    title: "Automated Proofreading",
-    description: (
-      <span className="text-sm">
-        Let AI handle the proofreading of your documents.
+        Bring your <Highlight>own</Highlight> API key. <br />
+        Pay for what you use.
       </span>
     ),
     header: <SkeletonTwo />,
@@ -340,37 +393,84 @@ const items = [
     icon: null,
   },
   {
-    title: "Contextual Suggestions",
+    title: "🌐 Chat with any webpage",
     description: (
       <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
-      </span>
-    ),
-    header: <SkeletonThree />,
-    className: "md:col-span-1",
-    icon: null,
-  },
-  {
-    title: "Sentiment Analysis",
-    description: (
-      <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
-      </span>
-    ),
-    header: <SkeletonFour />,
-    className: "md:col-span-2",
-    icon: null,
-  },
-
-  {
-    title: "Text Summarization",
-    description: (
-      <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
+        Assists in reading & writing on any webpage.
+        <br /> Save them on personal <Highlight>knowledge base.</Highlight>
       </span>
     ),
     header: <SkeletonFive />,
     className: "md:col-span-1",
     icon: null,
   },
+  {
+    title: "Chat between multiple files 🖇",
+    description: (
+      <p className="text-sm">
+        In build <Highlight>RAG</Highlight> for similarity search.
+        <br />
+        Providing results with quality references.
+      </p>
+    ),
+    header: <SkeletonFour />,
+    className: "md:col-span-1",
+    icon: null,
+  },
+  {
+    title: "👀 Vision",
+    description: (
+      <span className="text-sm">
+        Chat with any image. <br /> Generate new images with{" "}
+        <Highlight>DALL-E</Highlight>.
+      </span>
+    ),
+    header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: null,
+  },
 ];
+
+const Message = ({
+  text,
+  author,
+  variants,
+}: {
+  variants?: Record<string, any>;
+  text: string;
+  author: "human" | "ai";
+}) => {
+  return (
+    <motion.div
+      variants={variants}
+      className="flex w-fit flex-row items-center space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+    >
+      {author === "human" ? (
+        <Image
+          src="https://pbs.twimg.com/profile_images/1763380041356873728/li_Nl2LT_400x400.jpg"
+          alt="avatar"
+          height={100}
+          width={100}
+          className="h-6 w-6 rounded-full"
+        />
+      ) : (
+        <LogoChatGpt4 />
+      )}
+      <p className="text-left text-xs text-neutral-500">{text}</p>
+    </motion.div>
+  );
+};
+
+const Attachments = () => {
+  return (
+    <div className="flex items-center gap-0.5">
+      <div className="flex items-center gap-1.5">
+        <IconFileTypePdf />
+        <IconFileTypeCsv />
+        <IconJson />
+        <IconHtml />
+      </div>
+      <p className="text-neutral-400">...</p>
+    </div>
+  );
+};

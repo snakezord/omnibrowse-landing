@@ -3,8 +3,6 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import { BackgroundBeams } from "@/components/ui/background";
-import { HeroHighlight } from "@/components/ui/hero-highlight";
 
 export const metadata: Metadata = {
   title: "Omnibrowse | Next gen we assistant",

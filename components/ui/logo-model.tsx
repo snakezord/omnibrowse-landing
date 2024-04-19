@@ -24,7 +24,7 @@ export const LogoChatGpt3: FC<Props> = () => {
 
 export const LogoChatGpt4: FC<Props> = () => {
   return (
-    <div>
+    <span>
       <svg
         width="24"
         height="24"
@@ -38,7 +38,7 @@ export const LogoChatGpt4: FC<Props> = () => {
           fill="white"
         ></path>
       </svg>
-    </div>
+    </span>
   );
 };
 
@@ -127,8 +127,8 @@ export const LogoMixtral: FC<Props> = () => {
   return (
     <div>
       <svg
-        width="256px"
-        height="233px"
+        width="24"
+        height="24"
         viewBox="0 0 256 233"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
