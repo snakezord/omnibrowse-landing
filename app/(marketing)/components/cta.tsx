@@ -1,7 +1,6 @@
 import { ShimmerButton } from "@/components/ui/buttons/shimer";
 import { IconArrowDown } from "@tabler/icons-react";
 import { SignupFormDemo } from "@/components/Form";
-import { Highlight } from "@/components/ui/highlight";
 
 export const Cta = () => {
   return (
@@ -9,7 +8,7 @@ export const Cta = () => {
       <ShimmerButton>
         <div className="flex items-center gap-4">
           <p>Coming soon. 50% off for early adopters</p>
-          <IconArrowDown className="h-4 w-4 text-neutral-500 dark:text-white" />
+          <IconArrowDown className="hidden h-4 w-4 dark:text-neutral-200 sm:inline-block " />
         </div>
       </ShimmerButton>
       <SignupFormDemo />

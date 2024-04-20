@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Omnibrowse | Next gen we assistant",
-  description: "All-in-One AI Assistant. Personal, Smart.",
+  title: "Omnibrowse - Navigate the Web with personal AI by your side",
+  description: `The #1 browser extension with ChatGPT, Gemini, Claude, and more. Pay once. Use forever !`,
 };
 
 export default function RootLayout({

@@ -381,18 +381,6 @@ const SkeletonFive = () => {
 
 const items = [
   {
-    title: "No monthly fee, no limit ∞",
-    description: (
-      <span className="text-sm">
-        Bring your <Highlight>own</Highlight> API key. <br />
-        Pay for what you use.
-      </span>
-    ),
-    header: <SkeletonTwo />,
-    className: "md:col-span-1",
-    icon: null,
-  },
-  {
     title: "🌐 Chat with any webpage",
     description: (
       <span className="text-sm">
@@ -414,6 +402,18 @@ const items = [
       </p>
     ),
     header: <SkeletonFour />,
+    className: "md:col-span-1",
+    icon: null,
+  },
+  {
+    title: "No monthly fee, no limit ∞",
+    description: (
+      <span className="text-sm">
+        Bring your <Highlight>own</Highlight> API key. <br />
+        Pay for what you use.
+      </span>
+    ),
+    header: <SkeletonTwo />,
     className: "md:col-span-1",
     icon: null,
   },
