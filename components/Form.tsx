@@ -3,6 +3,8 @@ import React, { useState } from "react";
 
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import { getApiResponse } from "@/lib/api";
 
 export const emailRe =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -10,13 +12,28 @@ export const emailRe =
 export function SignupFormDemo() {
   const [input, setInput] = useState("");
   const [match, setMatch] = useState(false);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (match) {
-      console.log(input);
+      await getApiResponse<string | { err: string }>({
+        method: "POST",
+        apiEndpoint: `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/email`,
+        requestData: JSON.stringify({ email: input }),
+      });
+
+      setMatch(false);
       setInput("");
+      toast.success("Email sent! Please confirm in your inbox.", {
+        description: "It might be in your spam or junk folder. 🗑️",
+        position: "bottom-right",
+        duration: 14000,
+        closeButton: true,
+        className: "w-fit",
+      });
     }
   };
+
   return (
     <div className="w-full max-w-md rounded-none md:rounded-2xl">
       <form onSubmit={handleSubmit}>
