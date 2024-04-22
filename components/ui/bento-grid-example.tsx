@@ -324,7 +324,7 @@ const items = [
     title: "Chat with multiple files 🖇",
     description: (
       <p className="text-[1rem] md:text-sm">
-        In build <Highlight>RAG</Highlight> for similarity search.
+        In built <Highlight>RAG</Highlight> for similarity search.
         <br />
         Providing results with quality references.
       </p>

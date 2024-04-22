@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const PrivacyPolicy = () => {
   return (
-    <div className="h-full bg-white text-gray-950">
-      <div className="container p-8 px-60">
+    <div className="h-full w-full bg-white text-gray-950">
+      <div className="container p-8">
         <div className="flex flex-col">
           <header className="flex items-center justify-center gap-4 p-0 text-3xl md:p-12 md:text-2xl">
             <Image

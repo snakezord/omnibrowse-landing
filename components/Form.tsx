@@ -12,6 +12,7 @@ export const emailRe =
 export function SignupFormDemo() {
   const [input, setInput] = useState("");
   const [match, setMatch] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export function SignupFormDemo() {
         requestData: JSON.stringify({ email: input }),
       });
 
+      setSubmitted(true);
       setMatch(false);
       setInput("");
       toast.success("Thank you! Please confirm in your inbox.", {
@@ -39,6 +41,7 @@ export function SignupFormDemo() {
       <form onSubmit={handleSubmit}>
         <LabelInputContainer className="mb-4">
           <Input
+            disabled={submitted}
             value={input}
             onChange={(e) => {
               const match = emailRe.test(e.target.value);
@@ -54,17 +57,23 @@ export function SignupFormDemo() {
         </LabelInputContainer>
 
         <button
-          className="group/btn relative block h-12 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-950"
+          disabled={submitted}
+          className={cn(
+            "group/btn relative block h-12 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-950",
+            `disabled:cursor-not-allowed disabled:opacity-50`,
+          )}
           type="submit"
         >
           Get notified when available <span className="ml-3">📣</span>
-          <BottomGradient
-            className={
-              match
-                ? "btn:opacity-100 opacity-100"
-                : "btn:opacity-90 sm:btn:opacity-40 opacity-90 sm:opacity-40"
-            }
-          />
+          {!submitted && (
+            <BottomGradient
+              className={
+                match
+                  ? `btn:opacity-100 opacity-100`
+                  : `btn:opacity-90 sm:btn:opacity-40 opacity-90 sm:opacity-40`
+              }
+            />
+          )}
         </button>
 
         <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />

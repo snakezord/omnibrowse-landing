@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export const BentoGrid = ({
   className,
