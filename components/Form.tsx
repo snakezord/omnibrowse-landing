@@ -16,7 +16,7 @@ export function SignupFormDemo() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (match) {
-      await getApiResponse<string | { err: string }>({
+      await getApiResponse<{ data: string } | { err: string }>({
         method: "POST",
         apiEndpoint: `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/email`,
         requestData: JSON.stringify({ email: input }),
@@ -24,9 +24,9 @@ export function SignupFormDemo() {
 
       setMatch(false);
       setInput("");
-      toast.success("Email sent! Please confirm in your inbox.", {
-        description: "It might be in your spam or junk folder. 🗑️",
-        position: "bottom-right",
+      toast.success("Thank you! Please confirm in your inbox.", {
+        description: "It might be in your spam or junk folder 🗑️",
+        position: "top-left",
         duration: 14000,
         closeButton: true,
         className: "w-fit",
@@ -57,7 +57,7 @@ export function SignupFormDemo() {
           className="group/btn relative block h-12 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-950"
           type="submit"
         >
-          Notify me when available <span className="ml-3">📣</span>
+          Get notified when available <span className="ml-3">📣</span>
           <BottomGradient
             className={
               match

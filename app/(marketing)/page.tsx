@@ -18,7 +18,7 @@ export default function Home() {
         {/* <Navbar /> */}
 
         <MaxWidthWrapper className="mt-10 flex flex-col items-center justify-center text-center sm:mt-24">
-          <div className="flex flex-wrap gap-4 xl:flex-nowrap">
+          <div className="flex flex-wrap sm:gap-4 xl:flex-nowrap">
             <div className="flex w-full flex-col items-center justify-start gap-10 xl:w-fit xl:items-start">
               <Spotlight
                 className="-top-60 left-0 delay-1000 md:-top-24 md:left-24"

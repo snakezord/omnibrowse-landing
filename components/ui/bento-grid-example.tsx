@@ -110,7 +110,7 @@ const SkeletonTwo = () => {
       {elements.map((element, index) => (
         <motion.div
           key={element.id}
-          className={`absolute flex w-full flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 shadow-lg dark:border-white/[0.2] dark:bg-black`}
+          className={`absolute flex w-full flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 shadow-lg dark:border-white/[0.05] dark:bg-zinc-950`}
           style={{
             y: index * -CARD_OFFSET,
             scale: 1 - index * SCALE_FACTOR,
@@ -310,9 +310,10 @@ const items = [
   {
     title: "Chat with any webpage 🌐 ",
     description: (
-      <span className="text-sm">
+      <span className="text-[1rem] md:text-sm">
         Assists in reading & writing on any webpage.
-        <br /> Save them on personal <Highlight>knowledge base.</Highlight>
+        <br className="hidden sm:inline-block" /> Save them on personal{" "}
+        <Highlight>knowledge base</Highlight>.
       </span>
     ),
     header: <SkeletonFive />,
@@ -320,9 +321,9 @@ const items = [
     icon: null,
   },
   {
-    title: "Chat between multiple files 🖇",
+    title: "Chat with multiple files 🖇",
     description: (
-      <p className="text-sm">
+      <p className="text-[1rem] md:text-sm">
         In build <Highlight>RAG</Highlight> for similarity search.
         <br />
         Providing results with quality references.
@@ -336,7 +337,7 @@ const items = [
   {
     title: "Vision 👀",
     description: (
-      <span className="text-sm">
+      <span className="text-[1rem] md:text-sm">
         Chat with any image. <br /> Generate new images with{" "}
         <Highlight>DALL-E</Highlight>.
       </span>
@@ -348,9 +349,9 @@ const items = [
   {
     title: "No monthly fee, no limit ∞",
     description: (
-      <span className="text-sm">
+      <span className="text-[1rem] md:text-sm">
         Bring your <Highlight>own</Highlight> API key. Have full control.
-        <br />
+        <br className="hidden sm:inline-block" />
         Pay for what you use.
       </span>
     ),
@@ -372,7 +373,7 @@ const Message = ({
   return (
     <motion.div
       variants={variants}
-      className="flex w-fit flex-row items-center space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.15] dark:bg-black"
+      className="flex w-fit flex-row items-center space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.05] dark:bg-zinc-950"
     >
       {author === "human" ? (
         <Image
