@@ -14,12 +14,7 @@ import {
   IconHtml,
 } from "@tabler/icons-react";
 
-import {
-  LogoChatGpt4,
-  LogoClaude2,
-  LogoGemini,
-  LogoMixtral,
-} from "./logo-model";
+import { LogoChatGpt4, LogoClaude2, LogoGemini } from "./logo-model";
 
 export function BentoGridThirdDemo() {
   return (
@@ -51,70 +46,6 @@ export function BentoGridThirdDemo() {
     </BentoGrid>
   );
 }
-
-const SkeletonOne = () => {
-  const variants = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: 10,
-      rotate: 5,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-  const variantsSecond = {
-    initial: {
-      x: 0,
-    },
-    animate: {
-      x: -10,
-      rotate: -5,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
-
-  return (
-    <motion.div
-      initial="initial"
-      whileHover="animate"
-      className="dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex h-full min-h-[6rem] w-full flex-1 flex-col space-y-2"
-    >
-      <motion.div
-        variants={variants}
-        className="flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
-      >
-        <LogoChatGpt4 />
-        <p>GPT-4 Turbo</p>
-      </motion.div>
-      <motion.div
-        variants={variantsSecond}
-        className="ml-auto flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
-      >
-        <p>Claude 3</p>
-        <LogoClaude2 />
-      </motion.div>
-      <motion.div
-        variants={variants}
-        className="flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
-      >
-        <LogoGemini />
-        <p>Gemini Pro</p>
-      </motion.div>
-      <motion.div
-        variants={variantsSecond}
-        className="ml-auto flex w-fit flex-row items-center space-x-2 rounded-full border border-neutral-100 bg-white p-2 dark:border-white/[0.2] dark:bg-black"
-      >
-        <p>Mixtral</p>
-        <LogoMixtral />
-      </motion.div>
-    </motion.div>
-  );
-};
 
 const ApiKeyComponent = () => {
   return (
@@ -212,10 +143,10 @@ const SkeletonThree = () => {
       x: 0,
     },
     animate: {
-      x: 5,
-      rotate: 3,
+      x: -5,
+      rotate: -2,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
@@ -224,10 +155,10 @@ const SkeletonThree = () => {
       x: 0,
     },
     animate: {
-      x: -5,
-      rotate: -3,
+      x: 5,
+      rotate: 2,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
@@ -273,7 +204,7 @@ const SkeletonThree = () => {
 const SkeletonFour = () => {
   const first = {
     initial: {
-      x: 10,
+      x: -5,
     },
     hover: {
       x: 0,
@@ -323,10 +254,10 @@ const SkeletonFive = () => {
       x: 0,
     },
     animate: {
-      x: 10,
-      rotate: 5,
+      x: 5,
+      rotate: 2,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
@@ -335,10 +266,10 @@ const SkeletonFive = () => {
       x: 0,
     },
     animate: {
-      x: -10,
-      rotate: -5,
+      x: -5,
+      rotate: -2,
       transition: {
-        duration: 0.2,
+        duration: 0.3,
       },
     },
   };
@@ -351,7 +282,7 @@ const SkeletonFive = () => {
     >
       <Message text="Summarize my X feed" author="human" variants={variants} />
       <motion.div
-        className="flex w-fit items-center gap-1.5 rounded-2xl border p-1 dark:border-white/[0.1]"
+        className="flex w-fit items-center gap-1.5 rounded-2xl bg-stone-900 p-1"
         variants={scale}
       >
         <Image
@@ -361,27 +292,23 @@ const SkeletonFive = () => {
           height={100}
           alt="twitter"
         />
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start px-1">
           <p className="text-sm text-neutral-300">Home / X</p>
-          <p className="text-xs text-neutral-600">x.com/home</p>
+          <p className="text-xs text-neutral-500">x.com/home</p>
         </div>
       </motion.div>
-      <motion.div
+      <Message
+        text="Your feed consists of tweets from Historic Vids, Dan, Elon Musk..."
+        author="ai"
         variants={variantsSecond}
-        className="flex w-fit flex-row items-center justify-end space-x-2 rounded-full border border-neutral-100 bg-white p-2 text-start dark:border-white/[0.2] dark:bg-black"
-      >
-        <LogoChatGpt4 />
-        <p className="text-xs text-neutral-500">
-          Your feed consists of tweets from Historic Vids, Dan, Elon Musk...
-        </p>
-      </motion.div>
+      />
     </motion.div>
   );
 };
 
 const items = [
   {
-    title: "🌐 Chat with any webpage",
+    title: "Chat with any webpage 🌐 ",
     description: (
       <span className="text-sm">
         Assists in reading & writing on any webpage.
@@ -405,20 +332,9 @@ const items = [
     className: "md:col-span-1",
     icon: null,
   },
+
   {
-    title: "No monthly fee, no limit ∞",
-    description: (
-      <span className="text-sm">
-        Bring your <Highlight>own</Highlight> API key. <br />
-        Pay for what you use.
-      </span>
-    ),
-    header: <SkeletonTwo />,
-    className: "md:col-span-1",
-    icon: null,
-  },
-  {
-    title: "👀 Vision",
+    title: "Vision 👀",
     description: (
       <span className="text-sm">
         Chat with any image. <br /> Generate new images with{" "}
@@ -426,6 +342,19 @@ const items = [
       </span>
     ),
     header: <SkeletonThree />,
+    className: "md:col-span-1",
+    icon: null,
+  },
+  {
+    title: "No monthly fee, no limit ∞",
+    description: (
+      <span className="text-sm">
+        Bring your <Highlight>own</Highlight> API key. Have full control.
+        <br />
+        Pay for what you use.
+      </span>
+    ),
+    header: <SkeletonTwo />,
     className: "md:col-span-1",
     icon: null,
   },
@@ -443,7 +372,7 @@ const Message = ({
   return (
     <motion.div
       variants={variants}
-      className="flex w-fit flex-row items-center space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.2] dark:bg-black"
+      className="flex w-fit flex-row items-center space-x-2 rounded-2xl border border-neutral-100  bg-white p-2 dark:border-white/[0.15] dark:bg-black"
     >
       {author === "human" ? (
         <Image
@@ -456,19 +385,19 @@ const Message = ({
       ) : (
         <LogoChatGpt4 />
       )}
-      <p className="text-left text-xs text-neutral-500">{text}</p>
+      <p className="text-left text-xs text-neutral-300">{text}</p>
     </motion.div>
   );
 };
 
 const Attachments = () => {
   return (
-    <div className="flex items-center gap-0.5">
+    <div className="flex items-center gap-0.5 rounded-2xl bg-stone-900 p-2">
       <div className="flex items-center gap-1.5">
-        <IconFileTypePdf />
-        <IconFileTypeCsv />
-        <IconJson />
-        <IconHtml />
+        <IconFileTypePdf className="text-neutral-300" />
+        <IconFileTypeCsv className="text-neutral-300" />
+        <IconJson className="text-neutral-300" />
+        <IconHtml className="text-neutral-300" />
       </div>
       <p className="text-neutral-400">...</p>
     </div>

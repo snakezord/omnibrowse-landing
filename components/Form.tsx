@@ -54,12 +54,16 @@ export function SignupFormDemo() {
         </LabelInputContainer>
 
         <button
-          className="group/btn relative block h-12 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="group/btn relative block h-12 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-950"
           type="submit"
         >
           Notify me when available <span className="ml-3">📣</span>
           <BottomGradient
-            className={match ? "btn:opacity-100 opacity-100" : ""}
+            className={
+              match
+                ? "btn:opacity-100 opacity-100"
+                : "btn:opacity-90 sm:btn:opacity-40 opacity-90 sm:opacity-40"
+            }
           />
         </button>
 
@@ -74,7 +78,7 @@ const BottomGradient = ({ className }: { className?: string }) => {
     <>
       <span
         className={cn(
-          "absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100",
+          "absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-0 transition duration-500 group-hover/btn:h-[2px] group-hover/btn:opacity-100",
           className,
         )}
       />

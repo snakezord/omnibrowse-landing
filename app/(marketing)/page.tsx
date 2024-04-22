@@ -32,7 +32,7 @@ export default function Home() {
                   <br className="hidden md:inline-block" />
                   ChatGPT, Gemini, Claude, and more.{" "}
                 </p>
-                <Highlight className="w-fit text-2xl">
+                <Highlight className="mt-2 w-fit text-2xl">
                   Pay once. Use forever !
                 </Highlight>
               </div>
