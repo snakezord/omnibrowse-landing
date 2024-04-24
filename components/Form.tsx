@@ -13,11 +13,20 @@ export function SignupFormDemo() {
   const [input, setInput] = useState("");
   const [match, setMatch] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [pinged, setPinged] = useState(false);
+
+  const handlePing = async () => {
+    await getApiResponse<{ data: string } | { err: string }>({
+      method: "GET",
+      apiEndpoint: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
+    });
+    setPinged(true);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (match) {
-      await getApiResponse<{ data: string } | { err: string }>({
+      getApiResponse<{ data: string } | { err: string }>({
         method: "POST",
         apiEndpoint: `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/email`,
         requestData: JSON.stringify({ email: input }),
@@ -29,7 +38,7 @@ export function SignupFormDemo() {
       toast.success("Thank you! Please confirm in your inbox.", {
         description: "It might be in your spam or junk folder 🗑️",
         position: "top-left",
-        duration: 14000,
+        duration: 24000,
         closeButton: true,
         className: "w-fit",
       });
@@ -49,6 +58,8 @@ export function SignupFormDemo() {
               else setMatch(false);
 
               setInput(e.target.value);
+
+              if (!pinged) handlePing();
             }}
             id="email"
             placeholder="example@gmail.com"
